@@ -1,0 +1,24 @@
+{{template "views/partials/header" .}}
+
+<div class="container" id="body">
+    <div class="row">
+        <div style="margin-top: 15%">
+            <table class="u-full-width">
+                {{if not .Employees}}
+                <h4 class="h-center">Empty</h4>
+                {{else}}
+                <tbody>
+                    {{range .Employees}}
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {{end}}
+                </tbody>
+                {{end}}
+            </table>
+        </div>
+    </div>
+</div>
+
+{{template "views/partials/footer" .}}
