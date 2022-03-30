@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  front:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    restart: always
+    environment:
+      ENV: dev
+    ports:
+      - $REST_PORT:8080
+    volumes:
+      - .:/go/src/
+    networks:
+      - front
+    extra_hosts:
+      - 'host.docker.internal:172.17.0.1'
+
+networks:
+  front:
+    driver: bridge

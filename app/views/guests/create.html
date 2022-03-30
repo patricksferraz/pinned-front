@@ -1,0 +1,35 @@
+{{template "views/partials/header" .}}
+
+<div class="container">
+    <form action="" method="post" autocomplete="on" accept-charset="utf-8">
+        <div class="row" style="margin-top: 15%;">
+            <div class="one-half column">
+                <div class="row">
+                    <label for="name">Nome</label>
+                    <input class="u-full-width" type="text" placeholder="Seu nome" name="name" id="name"
+                    value="" required>
+                </div>
+                <div class="row">
+                    <label for="email">Documento</label>
+                    <input class="u-full-width" type="text" placeholder="CPF/CNPJ" name="doc" id="doc"
+                        value="" required>
+                </div>
+                <input type="hidden" name="_csrf" value="{{.csrfToken}}">
+                <input class="u-pull-right" type="submit" value="Cadastrar">
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    window.onload = () => {
+        {{if .Error}}
+            toast('{{.Error.Msg}}', 'error')
+        {{end}}
+        {{if .Response}}
+            toast('{{.Response.ID}}', 'success');
+        {{end}}
+    };
+</script>
+
+{{template "views/partials/footer" .}}
