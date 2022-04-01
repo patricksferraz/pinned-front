@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: whoare
+  name: front
   labels:
-    app: whoare
-    service: whoare
+    app: front
+    service: front
 spec:
   type: ClusterIP
   selector:
-    app: whoare
+    app: front
   ports:
   - name: http
     port: 8080

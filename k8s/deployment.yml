@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: whoare-v1
+  name: front-v1
   labels:
-    app: whoare
+    app: front
     version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: whoare
+      app: front
       version: v1
   template:
     metadata:
       labels:
-        app: whoare
+        app: front
         version: v1
     spec:
       containers:
-      - name: whoare
+      - name: front
         image: ghcr.io/c-4u/pinned-front
         imagePullPolicy: IfNotPresent
         ports:
@@ -26,7 +26,7 @@ spec:
           containerPort: 8080
         envFrom:
           - secretRef:
-              name: whoare-secret
+              name: front-secret
         resources:
           limits:
             memory: "128Mi"

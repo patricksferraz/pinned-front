@@ -23,7 +23,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/c-4u/pinned-front">
-    <img src="app/front/public/images/whoare.png" alt="Logo" width="100" height="100">
+    <img src="app/front/public/images/front.png" alt="Logo" width="100" height="100">
   </a>
 
   <h3 align="center">Pinned Front</h3>
@@ -181,7 +181,7 @@ Any contributions you make are **greatly appreciated**.
 
 patricksferraz - patrick.ferraz@outlook.com
 
-Project Link: [whoare](https://github.com/c-4u/pinned-front)
+Project Link: [front](https://github.com/c-4u/pinned-front)
 
 <!-- ACKNOWLEDGEMENTS -->
 <!-- ## Acknowledgements

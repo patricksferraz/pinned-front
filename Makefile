@@ -1,7 +1,7 @@
 .PHONY: build
 
 build:
-	docker-compose build whoare
+	docker-compose build front
 
 .PHONY: status logs start stop clean
 
@@ -9,22 +9,22 @@ ps:
 	docker-compose ps
 
 logs:
-	docker-compose logs -f whoare
+	docker-compose logs -f front
 
 up:
 	docker-compose up -d
 
 start:
-	docker-compose start whoare
+	docker-compose start front
 
 stop:
-	docker-compose stop whoare
+	docker-compose stop front
 
 down:stop
 	docker-compose down -v --remove-orphans
 
 attach:
-	docker-compose exec whoare bash
+	docker-compose exec front bash
 
 prune:
 	docker system prune --all --volumes
