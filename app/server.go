@@ -7,7 +7,6 @@ import (
 	"net/http"
 
 	"github.com/c-4u/pinned-front/config"
-	"github.com/c-4u/pinned-front/domain/entity"
 	"github.com/c-4u/pinned-front/domain/service"
 	"github.com/go-resty/resty/v2"
 	"github.com/gofiber/fiber/v2"
@@ -26,10 +25,10 @@ var public embed.FS
 var sessionStore = session.New()
 
 func init() {
-	sessionStore.RegisterType(entity.Session{})
+	sessionStore.RegisterType(Session{})
 }
 
-func StartFront(conf *config.Config) {
+func StartApp(conf *config.Config) {
 	engine := html.NewFileSystem(http.FS(views), ".html")
 
 	app := fiber.New(fiber.Config{
@@ -45,6 +44,7 @@ func StartFront(conf *config.Config) {
 	app.Get("/", front.Index)
 	guests := app.Group("/guests")
 	{
+		guests.Get("", middleware.CsrfProtection, front.GetGuests)
 		guests.Get("/create", middleware.CsrfProtection, front.GetCreateGuest)
 		guests.Post("/create", middleware.CsrfProtection, front.PostCreateGuest)
 	}

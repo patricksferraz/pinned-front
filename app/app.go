@@ -3,8 +3,8 @@ package app
 import (
 	"fmt"
 
-	"github.com/c-4u/pinned-front/domain/entity"
 	"github.com/c-4u/pinned-front/domain/service"
+	"github.com/c-4u/pinned-front/utils"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/session"
 )
@@ -32,7 +32,7 @@ func (a *Front) GetCreateGuest(c *fiber.Ctx) error {
 }
 
 func (a *Front) PostCreateGuest(c *fiber.Ctx) error {
-	var req entity.CreateGuestRequest
+	var req CreateGuestSchema
 
 	if err := c.BodyParser(&req); err != nil {
 		return c.Render("views/errors/error", fiber.Map{
@@ -41,11 +41,39 @@ func (a *Front) PostCreateGuest(c *fiber.Ctx) error {
 		)
 	}
 
-	httpRes, httpError := a.Service.CreateGuest(c.Context(), &req)
+	httpRes, httpError := a.Service.CreateGuest(c.Context(), req.Name, req.Doc)
 
 	return c.Render("views/guests/create", fiber.Map{
 		"Response":  httpRes,
 		"Error":     httpError,
 		"csrfToken": c.Locals("token"),
+	})
+}
+
+func (a *Front) GetGuests(c *fiber.Ctx) error {
+	var req SearchGuestsSchema
+
+	if err := c.QueryParser(&req); err != nil {
+		return c.Render("views/errors/error", fiber.Map{
+			"Status": fmt.Sprintf("%d - %s", fiber.StatusInternalServerError, fiber.ErrInternalServerError),
+			"Error":  err.Error()},
+		)
+	}
+
+	if req.PageToken == nil {
+		req.PageToken = utils.PString("")
+	}
+
+	if req.PageSize == nil {
+		req.PageSize = utils.PInt(10)
+	}
+
+	httpRes, httpError := a.Service.SearchGuests(c.Context(), req.PageToken, req.PageSize)
+
+	return c.Render("views/guests/index", fiber.Map{
+		"Guests":        httpRes.Guests,
+		"PageSize":      req.PageSize,
+		"NextPageToken": httpRes.NextPageToken,
+		"Error":         httpError,
 	})
 }

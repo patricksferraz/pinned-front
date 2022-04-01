@@ -11,3 +11,11 @@ func GetEnv(key string, defaultVal string) string {
 
 	return defaultVal
 }
+
+func PString(str string) *string {
+	return &str
+}
+
+func PInt(i int) *int {
+	return &i
+}

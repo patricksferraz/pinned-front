@@ -4,21 +4,35 @@
     <div class="row">
         <div style="margin-top: 15%">
             <table class="u-full-width">
-                {{if not .Employees}}
+                {{if not .Guests}}
                 <h4 class="h-center">Empty</h4>
                 {{else}}
-                <tbody>
-                    {{range .Employees}}
+                <tbody id="guests-table">
+                    {{range .Guests}}
                     <tr>
-                        <td></td>
-                        <td></td>
+                        <td>{{.Name}}</td>
+                        <td>{{.Doc}}</td>
                     </tr>
                     {{end}}
                 </tbody>
                 {{end}}
             </table>
+            <!-- TODO: add request -->
+            {{if .NextPageToken}}
+                <div class="h-center">
+                    <a class="button" href="#">Mais</a>
+                </div>
+            {{end}}
         </div>
     </div>
 </div>
+
+<script>
+    window.onload = () => {
+        {{if .Error}}
+            toast('{{.Error.Msg}}', 'error')
+        {{end}}
+    };
+</script>
 
 {{template "views/partials/footer" .}}

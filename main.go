@@ -32,5 +32,5 @@ func main() {
 		log.Fatal(err)
 	}
 
-	app.StartFront(&conf)
+	app.StartApp(&conf)
 }

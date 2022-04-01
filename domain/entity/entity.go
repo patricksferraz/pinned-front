@@ -1,6 +1,11 @@
 package entity
 
-type Session struct {
+import "time"
+
+type Base struct {
+	ID        *string    `json:"id"`
+	CreatedAt *time.Time `json:"created_at"`
+	UpdatedAt *time.Time `json:"updated_at"`
 }
 
 type HTTPError struct {
@@ -13,6 +18,22 @@ type HTTPResponse struct {
 }
 
 type CreateGuestRequest struct {
-	Name *string `json:"name" xml:"name" form:"name"`
-	Doc  *string `json:"doc" xml:"doc" form:"doc"`
+	Name *string `json:"name"`
+	Doc  *string `json:"doc"`
+}
+
+type SearchGuestsRequest struct {
+	PageToken *string `json:"page_token"`
+	PageSize  *int    `json:"page_size"`
+}
+
+type SearchGuestsResponse struct {
+	Guests        []*Guest `json:"guests"`
+	NextPageToken *string  `json:"next_page_token"`
+}
+
+type Guest struct {
+	Base `json:",inline"`
+	Name *string `json:"name"`
+	Doc  *string `json:"doc"`
 }
