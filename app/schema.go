@@ -12,3 +12,12 @@ type SearchGuestsSchema struct {
 	PageToken *string `query:"page_token"`
 	PageSize  *int    `query:"page_size"`
 }
+
+type CreateEmployeeSchema struct {
+	Name *string `json:"name" xml:"name" form:"name"`
+}
+
+type SearchEmployeesSchema struct {
+	PageToken *string `query:"page_token"`
+	PageSize  *int    `query:"page_size"`
+}

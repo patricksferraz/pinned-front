@@ -77,3 +77,56 @@ func (a *Front) GetGuests(c *fiber.Ctx) error {
 		"Error":         httpError,
 	})
 }
+
+func (a *Front) GetCreateEmployee(c *fiber.Ctx) error {
+	return c.Render("views/employees/create", fiber.Map{
+		"csrfToken": c.Locals("token"),
+	})
+}
+
+func (a *Front) PostCreateEmployee(c *fiber.Ctx) error {
+	var req CreateEmployeeSchema
+
+	if err := c.BodyParser(&req); err != nil {
+		return c.Render("views/errors/error", fiber.Map{
+			"Status": fmt.Sprintf("%d - %s", fiber.StatusInternalServerError, fiber.ErrInternalServerError),
+			"Error":  err.Error()},
+		)
+	}
+
+	httpRes, httpError := a.Service.CreateEmployee(c.Context(), req.Name)
+
+	return c.Render("views/employees/create", fiber.Map{
+		"Response":  httpRes,
+		"Error":     httpError,
+		"csrfToken": c.Locals("token"),
+	})
+}
+
+func (a *Front) GetEmployees(c *fiber.Ctx) error {
+	var req SearchEmployeesSchema
+
+	if err := c.QueryParser(&req); err != nil {
+		return c.Render("views/errors/error", fiber.Map{
+			"Status": fmt.Sprintf("%d - %s", fiber.StatusInternalServerError, fiber.ErrInternalServerError),
+			"Error":  err.Error()},
+		)
+	}
+
+	if req.PageToken == nil {
+		req.PageToken = utils.PString("")
+	}
+
+	if req.PageSize == nil {
+		req.PageSize = utils.PInt(10)
+	}
+
+	httpRes, httpError := a.Service.SearchEmployees(c.Context(), req.PageToken, req.PageSize)
+
+	return c.Render("views/employees/index", fiber.Map{
+		"Employees":     httpRes.Employees,
+		"PageSize":      req.PageSize,
+		"NextPageToken": httpRes.NextPageToken,
+		"Error":         httpError,
+	})
+}

@@ -5,14 +5,13 @@
         <div class="one-half offset-by-one-half column">
             <div style="margin-top: 15%">
                 <table class="u-full-width">
-                    {{if not .Guests}}
+                    {{if not .Employees}}
                     <h4 class="h-center">Empty</h4>
                     {{else}}
-                    <tbody id="guests-table">
-                        {{range .Guests}}
+                    <tbody id="employees-table">
+                        {{range .Employees}}
                         <tr>
                             <td>{{.Name}}</td>
-                            <td>{{.Doc}}</td>
                         </tr>
                         {{end}}
                     </tbody>
