@@ -99,3 +99,42 @@ func (s *Service) SearchEmployees(ctx context.Context, pageToken *string, pageSi
 
 	return response, httpError
 }
+
+func (s *Service) CreatePlace(ctx context.Context, name *string) (*entity.HTTPResponse, *entity.HTTPError) {
+	var httpError *entity.HTTPError
+	var response *entity.HTTPResponse
+
+	_, err := s.Rest.R().
+		SetBody(&entity.CreatePlaceRequest{
+			Name: name,
+		}).
+		SetResult(&response).
+		SetError(&httpError).
+		SetHeader("Accept", "application/json").
+		Post(*s.Baseurl + "/places")
+	if err != nil {
+		log.Println(err)
+	}
+
+	return response, httpError
+}
+
+func (s *Service) SearchPlaces(ctx context.Context, pageToken *string, pageSize *int) (*entity.SearchPlacesResponse, *entity.HTTPError) {
+	var httpError *entity.HTTPError
+	var response *entity.SearchPlacesResponse
+
+	_, err := s.Rest.R().
+		SetQueryParams(map[string]string{
+			"page_token": *pageToken,
+			"page_size":  fmt.Sprint(*pageSize),
+		}).
+		SetResult(&response).
+		SetError(&httpError).
+		SetHeader("Accept", "application/json").
+		Get(*s.Baseurl + "/places")
+	if err != nil {
+		log.Println(err)
+	}
+
+	return response, httpError
+}

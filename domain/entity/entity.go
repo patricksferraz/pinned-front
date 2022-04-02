@@ -56,3 +56,22 @@ type Employee struct {
 	Base `json:",inline"`
 	Name *string `json:"name"`
 }
+
+type CreatePlaceRequest struct {
+	Name *string `json:"name"`
+}
+
+type SearchPlacesRequest struct {
+	PageToken *string `json:"page_token"`
+	PageSize  *int    `json:"page_size"`
+}
+
+type SearchPlacesResponse struct {
+	Places        []*Place `json:"places"`
+	NextPageToken *string  `json:"next_page_token"`
+}
+
+type Place struct {
+	Base `json:",inline"`
+	Name *string `json:"name"`
+}

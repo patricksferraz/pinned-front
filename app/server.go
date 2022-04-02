@@ -54,6 +54,12 @@ func StartApp(conf *config.Config) {
 		employees.Get("/create", middleware.CsrfProtection, front.GetCreateEmployee)
 		employees.Post("/create", middleware.CsrfProtection, front.PostCreateEmployee)
 	}
+	places := app.Group("/places")
+	{
+		places.Get("", middleware.CsrfProtection, front.GetPlaces)
+		places.Get("/create", middleware.CsrfProtection, front.GetCreatePlace)
+		places.Post("/create", middleware.CsrfProtection, front.PostCreatePlace)
+	}
 
 	app.Use(recover.New())
 

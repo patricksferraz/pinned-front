@@ -130,3 +130,56 @@ func (a *Front) GetEmployees(c *fiber.Ctx) error {
 		"Error":         httpError,
 	})
 }
+
+func (a *Front) GetCreatePlace(c *fiber.Ctx) error {
+	return c.Render("views/places/create", fiber.Map{
+		"csrfToken": c.Locals("token"),
+	})
+}
+
+func (a *Front) PostCreatePlace(c *fiber.Ctx) error {
+	var req CreatePlaceSchema
+
+	if err := c.BodyParser(&req); err != nil {
+		return c.Render("views/errors/error", fiber.Map{
+			"Status": fmt.Sprintf("%d - %s", fiber.StatusInternalServerError, fiber.ErrInternalServerError),
+			"Error":  err.Error()},
+		)
+	}
+
+	httpRes, httpError := a.Service.CreatePlace(c.Context(), req.Name)
+
+	return c.Render("views/places/create", fiber.Map{
+		"Response":  httpRes,
+		"Error":     httpError,
+		"csrfToken": c.Locals("token"),
+	})
+}
+
+func (a *Front) GetPlaces(c *fiber.Ctx) error {
+	var req SearchPlacesSchema
+
+	if err := c.QueryParser(&req); err != nil {
+		return c.Render("views/errors/error", fiber.Map{
+			"Status": fmt.Sprintf("%d - %s", fiber.StatusInternalServerError, fiber.ErrInternalServerError),
+			"Error":  err.Error()},
+		)
+	}
+
+	if req.PageToken == nil {
+		req.PageToken = utils.PString("")
+	}
+
+	if req.PageSize == nil {
+		req.PageSize = utils.PInt(10)
+	}
+
+	httpRes, httpError := a.Service.SearchPlaces(c.Context(), req.PageToken, req.PageSize)
+
+	return c.Render("views/places/index", fiber.Map{
+		"Places":        httpRes.Places,
+		"PageSize":      req.PageSize,
+		"NextPageToken": httpRes.NextPageToken,
+		"Error":         httpError,
+	})
+}
