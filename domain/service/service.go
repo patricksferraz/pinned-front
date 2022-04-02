@@ -61,6 +61,23 @@ func (s *Service) SearchGuests(ctx context.Context, pageToken *string, pageSize 
 	return response, httpError
 }
 
+func (s *Service) GetGuest(ctx context.Context, guestID *string) (*entity.Guest, *entity.HTTPError) {
+	var httpError *entity.HTTPError
+	var response *entity.Guest
+
+	_, err := s.Rest.R().
+		SetPathParam("guest_id", *guestID).
+		SetResult(&response).
+		SetError(&httpError).
+		SetHeader("Accept", "application/json").
+		Get(*s.Baseurl + "/guests/{guest_id}")
+	if err != nil {
+		log.Println(err)
+	}
+
+	return response, httpError
+}
+
 func (s *Service) CreateEmployee(ctx context.Context, name *string) (*entity.HTTPResponse, *entity.HTTPError) {
 	var httpError *entity.HTTPError
 	var response *entity.HTTPResponse
@@ -93,6 +110,23 @@ func (s *Service) SearchEmployees(ctx context.Context, pageToken *string, pageSi
 		SetError(&httpError).
 		SetHeader("Accept", "application/json").
 		Get(*s.Baseurl + "/employees")
+	if err != nil {
+		log.Println(err)
+	}
+
+	return response, httpError
+}
+
+func (s *Service) GetEmployee(ctx context.Context, employeeID *string) (*entity.Employee, *entity.HTTPError) {
+	var httpError *entity.HTTPError
+	var response *entity.Employee
+
+	_, err := s.Rest.R().
+		SetPathParam("employee_id", *employeeID).
+		SetResult(&response).
+		SetError(&httpError).
+		SetHeader("Accept", "application/json").
+		Get(*s.Baseurl + "/employees/{employee_id}")
 	if err != nil {
 		log.Println(err)
 	}
@@ -139,6 +173,23 @@ func (s *Service) SearchPlaces(ctx context.Context, pageToken *string, pageSize 
 	return response, httpError
 }
 
+func (s *Service) GetPlace(ctx context.Context, placeID *string) (*entity.Place, *entity.HTTPError) {
+	var httpError *entity.HTTPError
+	var response *entity.Place
+
+	_, err := s.Rest.R().
+		SetPathParam("place_id", *placeID).
+		SetResult(&response).
+		SetError(&httpError).
+		SetHeader("Accept", "application/json").
+		Get(*s.Baseurl + "/places/{place_id}")
+	if err != nil {
+		log.Println(err)
+	}
+
+	return response, httpError
+}
+
 func (s *Service) CreateMenu(ctx context.Context, name *string) (*entity.HTTPResponse, *entity.HTTPError) {
 	var httpError *entity.HTTPError
 	var response *entity.HTTPResponse
@@ -171,6 +222,23 @@ func (s *Service) SearchMenus(ctx context.Context, pageToken *string, pageSize *
 		SetError(&httpError).
 		SetHeader("Accept", "application/json").
 		Get(*s.Baseurl + "/menus")
+	if err != nil {
+		log.Println(err)
+	}
+
+	return response, httpError
+}
+
+func (s *Service) GetMenu(ctx context.Context, menuID *string) (*entity.Menu, *entity.HTTPError) {
+	var httpError *entity.HTTPError
+	var response *entity.Menu
+
+	_, err := s.Rest.R().
+		SetPathParam("menu_id", *menuID).
+		SetResult(&response).
+		SetError(&httpError).
+		SetHeader("Accept", "application/json").
+		Get(*s.Baseurl + "/menus/{menu_id}")
 	if err != nil {
 		log.Println(err)
 	}

@@ -11,7 +11,7 @@
                     <tbody id="employees-table">
                         {{range .Employees}}
                         <tr>
-                            <td>{{.Name}}</td>
+                            <td><a href="/employees/{{.ID}}">{{.Name}}</a></td>
                         </tr>
                         {{end}}
                     </tbody>

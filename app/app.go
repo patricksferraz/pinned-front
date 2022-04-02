@@ -3,6 +3,7 @@ package app
 import (
 	"fmt"
 
+	"github.com/asaskevich/govalidator"
 	"github.com/c-4u/pinned-front/domain/service"
 	"github.com/c-4u/pinned-front/utils"
 	"github.com/gofiber/fiber/v2"
@@ -50,7 +51,7 @@ func (a *Front) PostCreateGuest(c *fiber.Ctx) error {
 	})
 }
 
-func (a *Front) GetGuests(c *fiber.Ctx) error {
+func (a *Front) SearchGuests(c *fiber.Ctx) error {
 	var req SearchGuestsSchema
 
 	if err := c.QueryParser(&req); err != nil {
@@ -75,6 +76,22 @@ func (a *Front) GetGuests(c *fiber.Ctx) error {
 		"PageSize":      req.PageSize,
 		"NextPageToken": httpRes.NextPageToken,
 		"Error":         httpError,
+	})
+}
+
+func (a *Front) GetGuest(c *fiber.Ctx) error {
+	guestID := c.Params("guest_id")
+	if !govalidator.IsUUIDv4(guestID) {
+		return c.Render("views/errors/error", fiber.Map{
+			"Status": fmt.Sprintf("%d - %s", fiber.StatusBadRequest, fiber.ErrBadRequest),
+			"Error":  "guest_id is not a valid uuid"},
+		)
+	}
+
+	guest, httpError := a.Service.GetGuest(c.Context(), &guestID)
+	return c.Render("views/guests/profile", fiber.Map{
+		"Guest": guest,
+		"Error": httpError,
 	})
 }
 
@@ -103,7 +120,7 @@ func (a *Front) PostCreateEmployee(c *fiber.Ctx) error {
 	})
 }
 
-func (a *Front) GetEmployees(c *fiber.Ctx) error {
+func (a *Front) SearchEmployees(c *fiber.Ctx) error {
 	var req SearchEmployeesSchema
 
 	if err := c.QueryParser(&req); err != nil {
@@ -128,6 +145,22 @@ func (a *Front) GetEmployees(c *fiber.Ctx) error {
 		"PageSize":      req.PageSize,
 		"NextPageToken": httpRes.NextPageToken,
 		"Error":         httpError,
+	})
+}
+
+func (a *Front) GetEmployee(c *fiber.Ctx) error {
+	employeeID := c.Params("employee_id")
+	if !govalidator.IsUUIDv4(employeeID) {
+		return c.Render("views/errors/error", fiber.Map{
+			"Status": fmt.Sprintf("%d - %s", fiber.StatusBadRequest, fiber.ErrBadRequest),
+			"Error":  "employee_id is not a valid uuid"},
+		)
+	}
+
+	employee, httpError := a.Service.GetEmployee(c.Context(), &employeeID)
+	return c.Render("views/employees/profile", fiber.Map{
+		"Employee": employee,
+		"Error":    httpError,
 	})
 }
 
@@ -156,7 +189,7 @@ func (a *Front) PostCreatePlace(c *fiber.Ctx) error {
 	})
 }
 
-func (a *Front) GetPlaces(c *fiber.Ctx) error {
+func (a *Front) SearchPlaces(c *fiber.Ctx) error {
 	var req SearchPlacesSchema
 
 	if err := c.QueryParser(&req); err != nil {
@@ -181,6 +214,22 @@ func (a *Front) GetPlaces(c *fiber.Ctx) error {
 		"PageSize":      req.PageSize,
 		"NextPageToken": httpRes.NextPageToken,
 		"Error":         httpError,
+	})
+}
+
+func (a *Front) GetPlace(c *fiber.Ctx) error {
+	placeID := c.Params("place_id")
+	if !govalidator.IsUUIDv4(placeID) {
+		return c.Render("views/errors/error", fiber.Map{
+			"Status": fmt.Sprintf("%d - %s", fiber.StatusBadRequest, fiber.ErrBadRequest),
+			"Error":  "place_id is not a valid uuid"},
+		)
+	}
+
+	place, httpError := a.Service.GetPlace(c.Context(), &placeID)
+	return c.Render("views/places/profile", fiber.Map{
+		"Place": place,
+		"Error": httpError,
 	})
 }
 
@@ -209,7 +258,7 @@ func (a *Front) PostCreateMenu(c *fiber.Ctx) error {
 	})
 }
 
-func (a *Front) GetMenus(c *fiber.Ctx) error {
+func (a *Front) SearchMenus(c *fiber.Ctx) error {
 	var req SearchMenusSchema
 
 	if err := c.QueryParser(&req); err != nil {
@@ -234,5 +283,21 @@ func (a *Front) GetMenus(c *fiber.Ctx) error {
 		"PageSize":      req.PageSize,
 		"NextPageToken": httpRes.NextPageToken,
 		"Error":         httpError,
+	})
+}
+
+func (a *Front) GetMenu(c *fiber.Ctx) error {
+	menuID := c.Params("menu_id")
+	if !govalidator.IsUUIDv4(menuID) {
+		return c.Render("views/errors/error", fiber.Map{
+			"Status": fmt.Sprintf("%d - %s", fiber.StatusBadRequest, fiber.ErrBadRequest),
+			"Error":  "menu_id is not a valid uuid"},
+		)
+	}
+
+	menu, httpError := a.Service.GetMenu(c.Context(), &menuID)
+	return c.Render("views/menus/profile", fiber.Map{
+		"Menu":  menu,
+		"Error": httpError,
 	})
 }

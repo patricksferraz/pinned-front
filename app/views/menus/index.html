@@ -11,7 +11,7 @@
                     <tbody id="menus-table">
                         {{range .Menus}}
                         <tr>
-                            <td>{{.Name}}</td>
+                            <td><a href="/menus/{{.ID}}">{{.Name}}</a></td>
                         </tr>
                         {{end}}
                     </tbody>

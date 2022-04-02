@@ -44,25 +44,29 @@ func StartApp(conf *config.Config) {
 	app.Get("/", front.Index)
 	guests := app.Group("/guests")
 	{
-		guests.Get("", middleware.CsrfProtection, front.GetGuests)
+		guests.Get("", middleware.CsrfProtection, front.SearchGuests)
+		guests.Get("/:guest_id", front.GetGuest)
 		guests.Get("/create", middleware.CsrfProtection, front.GetCreateGuest)
 		guests.Post("/create", middleware.CsrfProtection, front.PostCreateGuest)
 	}
 	employees := app.Group("/employees")
 	{
-		employees.Get("", middleware.CsrfProtection, front.GetEmployees)
+		employees.Get("", middleware.CsrfProtection, front.SearchEmployees)
+		employees.Get("/:employee_id", front.GetEmployee)
 		employees.Get("/create", middleware.CsrfProtection, front.GetCreateEmployee)
 		employees.Post("/create", middleware.CsrfProtection, front.PostCreateEmployee)
 	}
 	places := app.Group("/places")
 	{
-		places.Get("", middleware.CsrfProtection, front.GetPlaces)
+		places.Get("", middleware.CsrfProtection, front.SearchPlaces)
+		places.Get("/:place_id", front.GetPlace)
 		places.Get("/create", middleware.CsrfProtection, front.GetCreatePlace)
 		places.Post("/create", middleware.CsrfProtection, front.PostCreatePlace)
 	}
 	menus := app.Group("/menus")
 	{
-		menus.Get("", middleware.CsrfProtection, front.GetMenus)
+		menus.Get("", middleware.CsrfProtection, front.SearchMenus)
+		menus.Get("/:menu_id", front.GetMenu)
 		menus.Get("/create", middleware.CsrfProtection, front.GetCreateMenu)
 		menus.Post("/create", middleware.CsrfProtection, front.PostCreateMenu)
 	}

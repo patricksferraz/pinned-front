@@ -11,7 +11,7 @@
                     <tbody id="guests-table">
                         {{range .Guests}}
                         <tr>
-                            <td>{{.Name}}</td>
+                            <td><a href="/guests/{{.ID}}">{{.Name}}</a></td>
                             <td>{{.Doc}}</td>
                         </tr>
                         {{end}}
