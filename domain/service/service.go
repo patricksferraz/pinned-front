@@ -138,3 +138,42 @@ func (s *Service) SearchPlaces(ctx context.Context, pageToken *string, pageSize 
 
 	return response, httpError
 }
+
+func (s *Service) CreateMenu(ctx context.Context, name *string) (*entity.HTTPResponse, *entity.HTTPError) {
+	var httpError *entity.HTTPError
+	var response *entity.HTTPResponse
+
+	_, err := s.Rest.R().
+		SetBody(&entity.CreateMenuRequest{
+			Name: name,
+		}).
+		SetResult(&response).
+		SetError(&httpError).
+		SetHeader("Accept", "application/json").
+		Post(*s.Baseurl + "/menus")
+	if err != nil {
+		log.Println(err)
+	}
+
+	return response, httpError
+}
+
+func (s *Service) SearchMenus(ctx context.Context, pageToken *string, pageSize *int) (*entity.SearchMenusResponse, *entity.HTTPError) {
+	var httpError *entity.HTTPError
+	var response *entity.SearchMenusResponse
+
+	_, err := s.Rest.R().
+		SetQueryParams(map[string]string{
+			"page_token": *pageToken,
+			"page_size":  fmt.Sprint(*pageSize),
+		}).
+		SetResult(&response).
+		SetError(&httpError).
+		SetHeader("Accept", "application/json").
+		Get(*s.Baseurl + "/menus")
+	if err != nil {
+		log.Println(err)
+	}
+
+	return response, httpError
+}

@@ -30,3 +30,12 @@ type SearchPlacesSchema struct {
 	PageToken *string `query:"page_token"`
 	PageSize  *int    `query:"page_size"`
 }
+
+type CreateMenuSchema struct {
+	Name *string `json:"name" xml:"name" form:"name"`
+}
+
+type SearchMenusSchema struct {
+	PageToken *string `query:"page_token"`
+	PageSize  *int    `query:"page_size"`
+}

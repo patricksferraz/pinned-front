@@ -183,3 +183,56 @@ func (a *Front) GetPlaces(c *fiber.Ctx) error {
 		"Error":         httpError,
 	})
 }
+
+func (a *Front) GetCreateMenu(c *fiber.Ctx) error {
+	return c.Render("views/menus/create", fiber.Map{
+		"csrfToken": c.Locals("token"),
+	})
+}
+
+func (a *Front) PostCreateMenu(c *fiber.Ctx) error {
+	var req CreateMenuSchema
+
+	if err := c.BodyParser(&req); err != nil {
+		return c.Render("views/errors/error", fiber.Map{
+			"Status": fmt.Sprintf("%d - %s", fiber.StatusInternalServerError, fiber.ErrInternalServerError),
+			"Error":  err.Error()},
+		)
+	}
+
+	httpRes, httpError := a.Service.CreateMenu(c.Context(), req.Name)
+
+	return c.Render("views/menus/create", fiber.Map{
+		"Response":  httpRes,
+		"Error":     httpError,
+		"csrfToken": c.Locals("token"),
+	})
+}
+
+func (a *Front) GetMenus(c *fiber.Ctx) error {
+	var req SearchMenusSchema
+
+	if err := c.QueryParser(&req); err != nil {
+		return c.Render("views/errors/error", fiber.Map{
+			"Status": fmt.Sprintf("%d - %s", fiber.StatusInternalServerError, fiber.ErrInternalServerError),
+			"Error":  err.Error()},
+		)
+	}
+
+	if req.PageToken == nil {
+		req.PageToken = utils.PString("")
+	}
+
+	if req.PageSize == nil {
+		req.PageSize = utils.PInt(10)
+	}
+
+	httpRes, httpError := a.Service.SearchMenus(c.Context(), req.PageToken, req.PageSize)
+
+	return c.Render("views/menus/index", fiber.Map{
+		"Menus":         httpRes.Menus,
+		"PageSize":      req.PageSize,
+		"NextPageToken": httpRes.NextPageToken,
+		"Error":         httpError,
+	})
+}

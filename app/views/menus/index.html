@@ -1,0 +1,39 @@
+{{template "views/partials/header" .}}
+
+<div class="container" id="body">
+    <div class="row">
+        <div class="one-half offset-by-one-half column">
+            <div style="margin-top: 15%">
+                <table class="u-full-width">
+                    {{if not .Menus}}
+                    <h4 class="h-center">Empty</h4>
+                    {{else}}
+                    <tbody id="menus-table">
+                        {{range .Menus}}
+                        <tr>
+                            <td>{{.Name}}</td>
+                        </tr>
+                        {{end}}
+                    </tbody>
+                    {{end}}
+                </table>
+                <!-- TODO: add request -->
+                {{if .NextPageToken}}
+                    <div class="h-center">
+                        <a class="button" href="#">Mais</a>
+                    </div>
+                {{end}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = () => {
+        {{if .Error}}
+            toast('{{.Error.Msg}}', 'error')
+        {{end}}
+    };
+</script>
+
+{{template "views/partials/footer" .}}

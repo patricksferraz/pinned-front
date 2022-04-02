@@ -60,6 +60,12 @@ func StartApp(conf *config.Config) {
 		places.Get("/create", middleware.CsrfProtection, front.GetCreatePlace)
 		places.Post("/create", middleware.CsrfProtection, front.PostCreatePlace)
 	}
+	menus := app.Group("/menus")
+	{
+		menus.Get("", middleware.CsrfProtection, front.GetMenus)
+		menus.Get("/create", middleware.CsrfProtection, front.GetCreateMenu)
+		menus.Post("/create", middleware.CsrfProtection, front.PostCreateMenu)
+	}
 
 	app.Use(recover.New())
 

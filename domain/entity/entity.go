@@ -75,3 +75,22 @@ type Place struct {
 	Base `json:",inline"`
 	Name *string `json:"name"`
 }
+
+type CreateMenuRequest struct {
+	Name *string `json:"name"`
+}
+
+type SearchMenusRequest struct {
+	PageToken *string `json:"page_token"`
+	PageSize  *int    `json:"page_size"`
+}
+
+type SearchMenusResponse struct {
+	Menus         []*Menu `json:"menus"`
+	NextPageToken *string `json:"next_page_token"`
+}
+
+type Menu struct {
+	Base `json:",inline"`
+	Name *string `json:"name"`
+}
