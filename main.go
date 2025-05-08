@@ -7,9 +7,9 @@ import (
 	"runtime"
 
 	"github.com/Netflix/go-env"
-	"github.com/c-4u/pinned-front/app"
-	"github.com/c-4u/pinned-front/config"
 	"github.com/joho/godotenv"
+	"github.com/patricksferraz/pinned-front/app"
+	"github.com/patricksferraz/pinned-front/config"
 )
 
 func init() {

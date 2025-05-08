@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/c-4u/pinned-front/domain/entity"
 	"github.com/go-resty/resty/v2"
+	"github.com/patricksferraz/pinned-front/domain/entity"
 )
 
 type Service struct {

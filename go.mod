@@ -1,4 +1,4 @@
-module github.com/c-4u/pinned-front
+module github.com/patricksferraz/pinned-front
 
 go 1.18
 

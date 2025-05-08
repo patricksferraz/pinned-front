@@ -3,11 +3,11 @@ package app
 import (
 	"time"
 
-	"github.com/c-4u/pinned-front/domain/service"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/csrf"
 	"github.com/gofiber/fiber/v2/middleware/session"
 	"github.com/gofiber/fiber/v2/utils"
+	"github.com/patricksferraz/pinned-front/domain/service"
 )
 
 type Middleware struct {

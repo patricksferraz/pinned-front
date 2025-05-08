@@ -1,123 +1,105 @@
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Thanks again! Now go create something AMAZING! :D
-***
-***
-***
-*** To avoid retyping too much info. Do a search and replace for the following:
-*** github_username, repo_name, twitter_handle, email, project_title, project_description
--->
+# Pinned Front
 
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
+[![Go Report Card](https://goreportcard.com/badge/github.com/patricksferraz/pinned-front)](https://goreportcard.com/report/github.com/patricksferraz/pinned-front)
+[![GoDoc](https://godoc.org/github.com/patricksferraz/pinned-front?status.svg)](https://godoc.org/github.com/patricksferraz/pinned-front)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/c-4u/pinned-front">
-    <img src="app/front/public/images/front.png" alt="Logo" width="100" height="100">
-  </a>
+A modern, high-performance web application built with Go and Fiber framework, designed to manage guests, employees, places, and menus in a restaurant or hospitality environment.
 
-  <h3 align="center">Pinned Front</h3>
+## 🚀 Features
 
-  <p align="center">
-    <a href="https://github.com/c-4u/pinned-front"><strong>Explore the docs »</strong></a>
-    <!-- <br />
-    <br />
-    <a href="https://github.com/c-4u/pinned-front">View Demo</a>
-    ·
-    <a href="https://github.com/c-4u/pinned-front">Report Bug</a>
-    ·
-    <a href="https://github.com/c-4u/pinned-front">Request Feature</a>-->
-  </p>
-</div>
+- **High Performance**: Built with [Fiber](https://github.com/gofiber/fiber), a fast and efficient web framework
+- **Modern Architecture**: Clean code structure following domain-driven design principles
+- **Security**: Built-in CSRF protection and input validation
+- **Scalable**: Containerized with Docker and Kubernetes support
+- **Developer Friendly**: Hot-reload support with Air
+- **Environment Configuration**: Flexible configuration management with environment variables
 
-<!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <!-- <li><a href="#usage">Usage</a></li> -->
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <!-- <li><a href="#license">License</a></li> -->
-    <li><a href="#contact">Contact</a></li>
-    <!-- <li><a href="#acknowledgements">Acknowledgements</a></li> -->
-  </ol>
-</details>
+## 🛠️ Tech Stack
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+- **Backend**: Go 1.18+
+- **Web Framework**: Fiber v2
+- **Template Engine**: Fiber Template
+- **Containerization**: Docker & Docker Compose
+- **Orchestration**: Kubernetes
+- **Development**: Air for hot-reload
+- **Environment**: Go-ENV for configuration management
 
-Application for.
+## 📋 Prerequisites
 
-<!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
-<!--
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`github_username`, `repo_name`, `twitter_handle`, `email`, `project_title`, `project_description` -->
+- Go 1.18 or higher
+- Docker and Docker Compose (for containerized deployment)
+- Make (for using Makefile commands)
 
-### Built With
+## 🚀 Getting Started
 
-- [Go Lang](https://golang.org/)
-- List all: `go list -m all`
+1. Clone the repository:
+```bash
+git clone https://github.com/patricksferraz/pinned-front.git
+cd pinned-front
+```
 
-<!-- GETTING STARTED -->
-## Getting Started
+2. Copy the example environment file:
+```bash
+cp .env.example .env
+```
 
-To get a local copy up and running follow these simple steps.
+3. Run the application:
 
-### Prerequisites
+For development:
+```bash
+make dev
+```
 
-- Hiring a kubernetes cluster:
-  - [AWS](https://aws.amazon.com/pt/eks/?whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc&eks-blogs.sort-by=item.additionalFields.createdDate&eks-blogs.sort-order=desc)
-  - [Azure](https://azure.microsoft.com/pt-br/services/kubernetes-service/)
-  - [GCP](https://cloud.google.com/kubernetes-engine)
+For production:
+```bash
+make build
+make run
+```
 
-- [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
+Using Docker:
+```bash
+docker-compose up
+```
 
-- Create a secrets: see "_k8s/instructions.md_"
+## 🏗️ Project Structure
 
-### Deploy
+```
+.
+├── app/            # Application layer (handlers, routes)
+├── config/         # Configuration management
+├── domain/         # Domain layer (services, models)
+├── utils/          # Utility functions
+├── k8s/            # Kubernetes configurations
+├── .docker/        # Docker-related files
+└── .github/        # GitHub workflows and templates
+```
 
-- `kubectl apply -f ./k8s`
+## 🔧 Configuration
 
-<!-- USAGE EXAMPLES -->
-<!-- ## Usage
+The application can be configured using environment variables. See `.env.example` for available options.
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+## 🧪 Testing
 
-_For more examples, please refer to the [Documentation](https://example.com)_ -->
+```bash
+make test
+```
 
-<!-- ROADMAP -->
-## Roadmap
+## 📦 Deployment
 
-See the [open issues](https://github.com/c-4u/pinned-front/issues) for a list of proposed features (and known issues).
+### Docker
+```bash
+docker-compose up -d
+```
 
-<!-- CONTRIBUTING -->
-## Contributing
+### Kubernetes
+```bash
+kubectl apply -f k8s/
+```
 
-Any contributions you make are **greatly appreciated**.
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/patricksferraz/pinned-front/issues).
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -125,67 +107,16 @@ Any contributions you make are **greatly appreciated**.
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-**Prerequisites**:
+## 📝 License
 
-- Golang
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-  ```sh
-  wget https://golang.org/dl/go1.17.7.linux-amd64.tar.gz
-  rm -rf /usr/local/go && tar -C /usr/local -xzf go1.17.7.linux-amd64.tar.gz
-  export PATH=$PATH:/usr/local/go/bin
-  ```
+## 👨‍💻 Author
 
-- Docker and docker-compose
+Patrick Sferraz
 
-  ```sh
-  sudo apt-get install docker docker-compose docker.io -y
-  ```
+## 🙏 Acknowledgments
 
-- Environment: see "_.env.example_"
-
-**Installation**:
-
-1. Clone the repo
-
-   ```sh
-   git clone https://github.com/c-4u/pinned-front.git
-   ```
-
-2. Run
-
-   ```sh
-   make up
-   ```
-
-3. Test
-
-   ```sh
-   make gtest
-   ```
-
-**Installation in local kubernetes**:
-
-1. Install [k3d](https://k3d.io/), [Kind](https://kind.sigs.k8s.io/) or similar
-2. Install [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) and [Helm](https://helm.sh/)
-3. Follow the steps of [Getting Started](#getting-started)
-    - Connect to cluster and run:
-
-      `kubectl apply -f k8s/`
-<!-- LICENSE -->
-<!-- ## License -->
-
-<!-- Distributed under the MIT License. See `LICENSE` for more information. -->
-
-<!-- CONTACT -->
-## Contact
-
-patricksferraz - patrick.ferraz@outlook.com
-
-Project Link: [front](https://github.com/c-4u/pinned-front)
-
-<!-- ACKNOWLEDGEMENTS -->
-<!-- ## Acknowledgements
-
-* []()
-* []()
-* []() -->
+- [Fiber](https://github.com/gofiber/fiber) - Fast and efficient web framework
+- [Air](https://github.com/cosmtrek/air) - Live reload for Go applications
+- All other open-source projects that made this possible

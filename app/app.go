@@ -4,10 +4,10 @@ import (
 	"fmt"
 
 	"github.com/asaskevich/govalidator"
-	"github.com/c-4u/pinned-front/domain/service"
-	"github.com/c-4u/pinned-front/utils"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/session"
+	"github.com/patricksferraz/pinned-front/domain/service"
+	"github.com/patricksferraz/pinned-front/utils"
 )
 
 type Front struct {

@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: front
-        image: ghcr.io/c-4u/pinned-front
+        image: ghcr.io/patricksferraz/pinned-front
         imagePullPolicy: IfNotPresent
         ports:
         - name: http

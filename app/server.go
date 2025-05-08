@@ -6,14 +6,14 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/c-4u/pinned-front/config"
-	"github.com/c-4u/pinned-front/domain/service"
 	"github.com/go-resty/resty/v2"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/fiber/v2/middleware/session"
 	"github.com/gofiber/template/html"
+	"github.com/patricksferraz/pinned-front/config"
+	"github.com/patricksferraz/pinned-front/domain/service"
 )
 
 //go:embed views/*
